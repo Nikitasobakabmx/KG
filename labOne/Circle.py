@@ -13,15 +13,17 @@ class Circle(Shape):
 
     def draw(self):
         glPushMatrix()
-
+        glLoadIdentity() 
         #rotate
         glTranslatef(self.pos[0], self.pos[1], self.pos[2])
         glRotatef(self.xRot,1,0,0)
         glRotatef(self.yRot,0,1,0)
         glRotatef(self.zRot,0,0,1)
 
+        color = [0.0, 0.0, 0.0, 1.0]
         glEnable(GL_COLOR_MATERIAL)
-        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
+        glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, color)
+        glColor4f(color[0], color[1], color[2], color[3])
 
         glutSolidSphere(self.radius, 100, 15)
 

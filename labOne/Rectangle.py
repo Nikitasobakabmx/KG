@@ -15,9 +15,11 @@ class Ractangle(Shape):
     def draw(self):
         #rotation
         glPushMatrix()
-        red = [0, 0, 0, 1]
+        glLoadIdentity() 
+        color = [1, 0, 0, 1]
+        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color)
         glEnable(GL_COLOR_MATERIAL)
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, red)
+        glColor3f(color[0], color[1], color[2])
         #glColorMaterial(GL_FRONT_AND_BACK, red)
         # glColorMaterial(GL_BACK, GL_AMBIENT)
 
@@ -29,8 +31,8 @@ class Ractangle(Shape):
         glutSolidCube(self.size)
         
         #rotation per frame
-        self.xRot = self.xRot + 0.25
-        self.yRot = self.yRot + 0.25
+        self.xRot = self.xRot + 0.9
+        self.yRot = self.yRot - 1.5
 
         glPopMatrix()
         

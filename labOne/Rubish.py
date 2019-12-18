@@ -21,8 +21,6 @@ class Rubish:
         glutIdleFunc(self.draw)
 
     def draw(self):
-        self.setUI()
-        self.setLight()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         for shape in self.shapes[::-1]:
             shape.draw()
@@ -66,5 +64,6 @@ class Rubish:
         glEnable(GL_DEPTH_TEST)
 
     def start(self):
-        
+        self.setUI()
+        self.setLight()
         glutMainLoop()

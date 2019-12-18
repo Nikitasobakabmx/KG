@@ -13,15 +13,18 @@ class Bagel(Shape):
 
     def draw(self):
         glPushMatrix()
-
+        glLoadIdentity() 
         #rotate
         glTranslatef(self.pos[0], self.pos[1], self.pos[2])
         glRotatef(self.xRot,1,0,0)
         glRotatef(self.yRot,0,1,0)
         glRotatef(self.zRot,0,0,1)
 
+        color = [1, 1, 1, 1]
         glEnable(GL_COLOR_MATERIAL)
-        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
+        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, color)
+        glColor3f(color[0], color[1], color[2])
+        #glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
         glutWireTorus(0.1 ,self.radius, 800, 60)
 
