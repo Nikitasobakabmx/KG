@@ -3,10 +3,10 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from Shape import Shape
 
-class Circle(Shape):
-    def __init__(self, radius = 0.8, position = (-1.0,-1.0,-10.0)):
-        self.radius = radius
+class Bagel(Shape):
+    def __init__(self, radius = 1, position = (-1.0,-1.0,-10.0)):
         self.pos = position
+        self.radius = radius
         self.xRot = 0
         self.yRot = 0
         self.zRot = 0
@@ -23,9 +23,10 @@ class Circle(Shape):
         glEnable(GL_COLOR_MATERIAL)
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
-        glutSolidSphere(self.radius, 100, 15)
+        glutWireTorus(0.1 ,self.radius, 800, 60)
 
         glPopMatrix()
 
         self.xRot = self.xRot + 0.4
         self.yRot = self.yRot + 0.4
+        self.zRot = self.zRot + 0.2

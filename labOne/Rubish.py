@@ -1,5 +1,6 @@
 from Circle import Circle
 from Shape import Shape
+from Bagel import Bagel
 from Rectangle import Ractangle
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -7,21 +8,30 @@ from OpenGL.GLUT import *
 import sys
 
 class Rubish:
-    def __init__(self, window = (300, 300), shapes = [ Circle(), Ractangle(), ]):   
+    def __init__(self, window = (300, 300), shapes = [Ractangle(), Circle(), Bagel(), Bagel(position = [1.0,1.0,-12.0]) ]):   
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
         glutInitWindowSize(window[0],window[1])
+        glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE)
         glutInit(sys.argv)
         self.window = window
         #draw window
+        self.bgColor = [0.0,0.0,0.0,0.0]
         glutCreateWindow("Rubish".encode("UTF8"))
         self.shapes = shapes
-        for shape in shapes:
-            glutIdleFunc(shape.draw)
+        glutIdleFunc(self.draw)
 
-        
-    def setUI(self, bgColor = (0.0,0.0,0.0,0.0), angle = 30):
-        self.bgColor = bgColor
-        glClearColor(bgColor[0], bgColor[1], bgColor[2], bgColor[3])
+    def draw(self):
+        self.setUI()
+        self.setLight()
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        for shape in self.shapes[::-1]:
+            shape.draw()
+        glutSwapBuffers()
+
+
+    def setUI(self, angle = 30):
+        self.bgColor[1] += 1
+        glClearColor(self.bgColor[0], self.bgColor[1], self.bgColor[2], self.bgColor[3])
 
         glClearDepth(1.0)
         glDepthFunc(GL_LESS)
@@ -43,15 +53,18 @@ class Rubish:
     def setLight(self, light = 0):
         glEnable(GL_LIGHTING)
 
-        lightPosition = (1, 1, 0, 0.0)
-        lightSetting = (0.5, 0.5, 0.5, 1.0)
+        lightPosition = (0, 1, 0, 0)
+        lightDirection = (0, 0, 0,)
         glClearColor(0.0, 0.0, 0.0, 1.0)
         glEnable(GL_LIGHT0)
+        
         glLightfv(GL_LIGHT0, GL_POSITION, lightPosition)
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lightSetting)
+        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, lightDirection)
+
+        #glLightModelfv(GL_LIGHT_MODEL_DIFFUSE, lightSetting)
+        #glLightfv(GL_LIGHT0, GL_DIFFUSE, (1, 1, 1, 1))
         glEnable(GL_DEPTH_TEST)
 
     def start(self):
-        self.setUI()
-        self.setLight()
+        
         glutMainLoop()

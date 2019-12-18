@@ -57,61 +57,33 @@ void display()
 	glutSolidSphere(4.75, 16, 16);//
 	glPopMatrix();// Восстановить матрицу преобразования модели
 	// Рисуем левую нижнюю сферу
-
 	glPushMatrix();// Сохранить матрицу преобразования модели
-
 	glTranslatef(-6.75, -6.75, 0.0);
-
 	glRotatef(xRot, 1.0 , 0.0 , 0.0 );
-
-	glRotatef(yRot, 0.0 , 1.0 , 0.0 );
-
+	glRotatef(yRot, 0.0 , 1.0 , 0.0 )
 	glRotatef(zRot, 0.0 , 0.0 , 1.0 );
-
 	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
-
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-
 	glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
-
 	glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
-
 	//glutSolidCube(5);
-
 	glutSolidSphere(4.75, 16, 16);
-
 	glPopMatrix();// Восстановить матрицу преобразования модели
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////// Рисуем правый нижний куб (Доминант диффуз)
-
 	glPushMatrix();// Сохранить матрицу преобразования модели
-
 	glTranslatef(6.75, -6.75, 0.0);
-
 	glRotatef(xRot, 1.0 , 0.0 , 0.0 );
-
 	glRotatef(yRot, 0.0 , 1.0 , 0.0 );
-
 	glRotatef(zRot, 0.0 , 0.0 , 1.0 );
-
 	glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
-
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-
 	glMaterialfv(GL_FRONT, GL_SPECULAR, no_mat);
-
 	glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
-
 	//glutSolidSphere(4.75, 16, 16); // Диаметр, число параллелей и меридиан
-
 	glutSolidCube(5);
-
 	glPopMatrix();// Восстановить матрицу преобразования модели
-
 	glutSwapBuffers();// Переключить буфер
-
 	//glFlush();
 
 }
