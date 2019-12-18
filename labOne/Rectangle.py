@@ -17,7 +17,7 @@ class Ractangle(Shape):
         glPushMatrix()
         glLoadIdentity() 
         color = [1, 0, 0, 1]
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color)
+        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, 0.3)
         glEnable(GL_COLOR_MATERIAL)
         glColor3f(color[0], color[1], color[2])
         #glColorMaterial(GL_FRONT_AND_BACK, red)
