@@ -4,7 +4,7 @@ from OpenGL.GLUT import *
 from Shape import Shape
 
 class Bagel(Shape):
-    def __init__(self, radius = 1, position = (-1.0,-1.0,-10.0)):
+    def __init__(self, radius = 1, position = (-1.0,-1.0,1.0)):
         self.pos = position
         self.radius = radius
         self.xRot = 0
@@ -22,7 +22,6 @@ class Bagel(Shape):
 
         glEnable(GL_COLOR_MATERIAL)
         glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
-
         glutWireTorus(0.1 ,self.radius, 800, 60)
 
         glPopMatrix()

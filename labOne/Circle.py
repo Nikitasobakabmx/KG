@@ -3,8 +3,9 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from Shape import Shape
 
+
 class Circle(Shape):
-    def __init__(self, radius = 0.8, position = (-1.0,-1.0,-10.0)):
+    def __init__(self, radius = 0.8, position = (-1.0,-1.0,1.0)):
         self.radius = radius
         self.pos = position
         self.xRot = 0

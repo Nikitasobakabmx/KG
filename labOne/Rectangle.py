@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
 class Ractangle(Shape):
-    def __init__(self, size = 1, color = (0,0,0,1), position = [1.0,1.0,-12.0]):
+    def __init__(self, size = 1, color = (0,0,0,1), position = [1.0,1.0, -2.0]):
         self.pos = position
         self.size = size
         self.color = color
