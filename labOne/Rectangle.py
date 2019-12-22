@@ -16,8 +16,13 @@ class Ractangle(Shape):
         #rotation
         glPushMatrix()
         red = [0, 0, 0, 1]
+        glDisable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, red)
+        glColor4f(0,0,0,0.3)
+        glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, (1, 0, 0))
+        glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, (0, 0, 1))
+        glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, (0, 1, 0))
+        glMaterialf(GL_FRONT,GL_SHININESS, 127)
         #glColorMaterial(GL_FRONT_AND_BACK, red)
         # glColorMaterial(GL_BACK, GL_AMBIENT)
 

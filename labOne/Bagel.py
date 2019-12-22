@@ -20,8 +20,13 @@ class Bagel(Shape):
         glRotatef(self.yRot,0,1,0)
         glRotatef(self.zRot,0,0,1)
 
+        glDisable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
-        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
+        glColor4f(1,1,1,0.2)
+        glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, (1, 0, 0))
+        glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, (0, 0, 1))
+        glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, (0, 1, 0))
+        glMaterialf(GL_FRONT,GL_SHININESS, 0)
         glutWireTorus(0.1 ,self.radius, 800, 60)
 
         glPopMatrix()

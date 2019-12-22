@@ -21,12 +21,16 @@ class Circle(Shape):
         glRotatef(self.yRot,0,1,0)
         glRotatef(self.zRot,0,0,1)
 
+        glDisable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
-        glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
-
+        glColor4f(1,1,1,0.5)
+        glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, (0, 0, 0))
+        glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, (0, 0, 0))
+        glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, (0, 0, 0))
+        glMaterialf(GL_FRONT,GL_SHININESS, 0)
+        #glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
         glutSolidSphere(self.radius, 100, 15)
 
         glPopMatrix()
-
         self.xRot = self.xRot + 0.4
         self.yRot = self.yRot + 0.4
