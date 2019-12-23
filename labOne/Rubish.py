@@ -30,7 +30,17 @@ class Rubish:
         self.KRadius = 0
         self.CtrlPress = False
 
-        self.fog = False
+        self.ListX = 0
+        self.ListY = 0
+        self.ListZ = 0
+
+        image = Image.open("image.jpeg")
+        self.ix = image.size[0]
+        self.iy = image.size[1]
+        self.image = image.convert('RGBX').tobytes() 
+
+        self.depthMapFBO = glGenFramebuffers(1)
+
         self.Nurb = Nurbs()   
         self.Nurb.init_surface()
         glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
@@ -47,7 +57,7 @@ class Rubish:
         glutIdleFunc(self.draw)
         self.setUI()
 
-    
+   
     def xKey(self, key, x, y):
         if key == GLUT_KEY_LEFT:
             self.KdeltaZ = 0
@@ -104,11 +114,10 @@ class Rubish:
         if key == 114:
             self.CtrlPress = True
 
+
     def draw(self):
         self.setLight()
-
         glLoadIdentity()
-    
         glTranslatef(0,0,-5)
         self.angleX += self.deltaX
         self.angleY += self.deltaY
@@ -116,13 +125,29 @@ class Rubish:
         glRotatef(self.KangleX, 1, 0, 0)
         glRotatef(self.KangleY, 0, 1, 0)
         glRotatef(self.KangleZ, 0, 0, 1)
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
-        # for shape in self.shapes[::-1]:
-        #     shape.draw()
-        self.shapes[0].drawHM()
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glPushMatrix()
-        glTranslatef(0, -2, 0)
+
+        glEnable(GL_TEXTURE_2D)
+        glTranslatef(0, 1, -4)
+
+        glRotatef(self.ListX, 1, 0, 0)
+        glRotatef(self.ListY, 0, 1, 0)
+        glRotatef(self.ListZ, 0, 0, 1)
+
+        self.ListX += 2
+        self.ListY += 2
+        self.ListZ += 2
+
+        glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_REPLACE)
+        glBindTexture(GL_TEXTURE_2D,self.texture)
+        self.shapes[0].drawHM()
+        glDisable(GL_TEXTURE_2D)
+
+        glPopMatrix()
+
+        glPushMatrix()
+        glTranslatef(0, -2, -4)
         self.Nurb.draw()
         glPopMatrix()
         glutSwapBuffers()
@@ -146,10 +171,32 @@ class Rubish:
         gluPerspective(angle, float(self.window[0])/float(self.window[1]), 0.1, 100.0)
         glMatrixMode(GL_MODELVIEW)
     
+        #trextures       
+        self.texture = glGenTextures(1) 
+        glBindTexture(GL_TEXTURE_2D,self.texture)
+
+        glPixelStorei(GL_UNPACK_ALIGNMENT,1)
+        glTexImage2D(GL_TEXTURE_2D, 0, 3, self.ix, self.iy, 0, GL_RGBA, GL_UNSIGNED_BYTE, self.image)
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+
         #Nurb
         glEnable(GL_AUTO_NORMAL)
         glEnable(GL_NORMALIZE) 
-        
+
+        #shadow
+        glBindFramebuffer(GL_FRAMEBUFFER, self.depthMapFBO)    
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, self.texture, 0)
+        glDrawBuffer(GL_NONE)
+        glReadBuffer(GL_NONE)
+        glBindFramebuffer(GL_FRAMEBUFFER, 0)
+
+
     def setLight(self, light = 0):
         glEnable(GL_LIGHTING)
         glLoadIdentity()
@@ -175,6 +222,7 @@ class Rubish:
         glEnable(GL_DEPTH_TEST)
 
     def start(self):
+        # self.setUI()
         glutMainLoop()
 
 
