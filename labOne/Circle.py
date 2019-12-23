@@ -30,7 +30,8 @@ class Circle(Shape):
         glMaterialf(GL_FRONT,GL_SHININESS, 0)
         #glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
         glutSolidSphere(self.radius, 100, 15)
-
+        glDisable(GL_COLOR_MATERIAL)
+        glEnable(GL_CULL_FACE)
         glPopMatrix()
         self.xRot = self.xRot + 0.4
         self.yRot = self.yRot + 0.4

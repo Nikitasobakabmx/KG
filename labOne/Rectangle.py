@@ -12,6 +12,44 @@ class Ractangle(Shape):
         self.yRot = 0.0
         self.zRot = 0.0
 
+    def drawHM(self):
+        glPushMatrix()
+
+        glBegin(GL_QUADS)
+
+        glTexCoord2f(0.0, 0.0); glVertex3f(-1.0, -1.0,  1.0)
+        glTexCoord2f(1.0, 0.0); glVertex3f( 1.0, -1.0,  1.0)
+        glTexCoord2f(1.0, 1.0); glVertex3f( 1.0,  1.0,  1.0)
+        glTexCoord2f(0.0, 1.0); glVertex3f(-1.0,  1.0,  1.0)
+
+        glTexCoord2f(1.0, 0.0); glVertex3f(-1.0, -1.0, -1.0)
+        glTexCoord2f(1.0, 1.0); glVertex3f(-1.0,  1.0, -1.0)
+        glTexCoord2f(0.0, 1.0); glVertex3f( 1.0,  1.0, -1.0)
+        glTexCoord2f(0.0, 0.0); glVertex3f( 1.0, -1.0, -1.0)
+        
+        glTexCoord2f(0.0, 1.0); glVertex3f(-1.0,  1.0, -1.0)
+        glTexCoord2f(0.0, 0.0); glVertex3f(-1.0,  1.0,  1.0)
+        glTexCoord2f(1.0, 0.0); glVertex3f( 1.0,  1.0,  1.0)
+        glTexCoord2f(1.0, 1.0); glVertex3f( 1.0,  1.0, -1.0)
+
+        glTexCoord2f(1.0, 1.0); glVertex3f(-1.0, -1.0, -1.0)
+        glTexCoord2f(0.0, 1.0); glVertex3f( 1.0, -1.0, -1.0)
+        glTexCoord2f(0.0, 0.0); glVertex3f( 1.0, -1.0,  1.0)
+        glTexCoord2f(1.0, 0.0); glVertex3f(-1.0, -1.0,  1.0)
+
+        glTexCoord2f(1.0, 0.0); glVertex3f( 1.0, -1.0, -1.0)
+        glTexCoord2f(1.0, 1.0); glVertex3f( 1.0,  1.0, -1.0)
+        glTexCoord2f(0.0, 1.0); glVertex3f( 1.0,  1.0,  1.0)
+        glTexCoord2f(0.0, 0.0); glVertex3f( 1.0, -1.0,  1.0)
+
+        glTexCoord2f(0.0, 0.0); glVertex3f(-1.0, -1.0, -1.0)
+        glTexCoord2f(1.0, 0.0); glVertex3f(-1.0, -1.0,  1.0)
+        glTexCoord2f(1.0, 1.0); glVertex3f(-1.0,  1.0,  1.0)
+        glTexCoord2f(0.0, 1.0); glVertex3f(-1.0,  1.0, -1.0)
+
+        glEnd()
+        glPopMatrix()
+
     def draw(self):
         #rotation
         glPushMatrix()
@@ -37,5 +75,7 @@ class Ractangle(Shape):
         self.xRot = self.xRot + 0.25
         self.yRot = self.yRot + 0.25
 
+        glDisable(GL_COLOR_MATERIAL)
+        glEnable(GL_CULL_FACE)
         glPopMatrix()
         

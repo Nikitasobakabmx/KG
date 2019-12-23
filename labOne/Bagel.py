@@ -29,6 +29,9 @@ class Bagel(Shape):
         glMaterialf(GL_FRONT,GL_SHININESS, 0)
         glutWireTorus(0.1 ,self.radius, 800, 60)
 
+        glDisable(GL_COLOR_MATERIAL)
+        glEnable(GL_CULL_FACE)
+        
         glPopMatrix()
 
         self.xRot = self.xRot + 0.4
