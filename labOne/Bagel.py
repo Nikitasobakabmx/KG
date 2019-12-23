@@ -22,7 +22,7 @@ class Bagel(Shape):
 
         glDisable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
-        glColor4f(1,1,1,0.2)
+        glColor4f(1,1,1,1)
         glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, (1, 0, 0))
         glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, (0, 0, 1))
         glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, (0, 1, 0))
@@ -31,7 +31,7 @@ class Bagel(Shape):
 
         glDisable(GL_COLOR_MATERIAL)
         glEnable(GL_CULL_FACE)
-        
+
         glPopMatrix()
 
         self.xRot = self.xRot + 0.4

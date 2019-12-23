@@ -56,7 +56,7 @@ class Ractangle(Shape):
         red = [0, 0, 0, 1]
         glDisable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
-        glColor4f(0,0,0,0.3)
+        glColor4f(1,1,1,1)
         glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, (1, 0, 0))
         glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, (0, 0, 1))
         glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, (0, 1, 0))

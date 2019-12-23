@@ -23,7 +23,7 @@ class Circle(Shape):
 
         glDisable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
-        glColor4f(1,1,1,0.5)
+        glColor4f(1,1,1,1)
         glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT, (0, 0, 0))
         glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE, (0, 0, 0))
         glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR, (0, 0, 0))

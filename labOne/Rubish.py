@@ -118,11 +118,11 @@ class Rubish:
         glRotatef(self.KangleZ, 0, 0, 1)
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)    
-        for shape in self.shapes[::-1]:
-            shape.draw()
-
+        # for shape in self.shapes[::-1]:
+        #     shape.draw()
+        self.shapes[0].drawHM()
         glPushMatrix()
-        glTranslatef(0, -3, 0)
+        glTranslatef(0, -2, 0)
         self.Nurb.draw()
         glPopMatrix()
         glutSwapBuffers()

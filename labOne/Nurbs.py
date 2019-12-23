@@ -19,9 +19,9 @@ class Nurbs:
                 self.ctrlPoints[i][j][0] = 2 * (i - 1.5)
                 self.ctrlPoints[i][j][1] = 2 * (j - 1.5)
                 if (i == 1 or i == 2) and (j == 1 or j == 2):
-                    self.ctrlPoints[i][j][2] = 3
+                    self.ctrlPoints[i][j][2] = 2
                 else:
-                    self.ctrlPoints[i][j][2] = -3
+                    self.ctrlPoints[i][j][2] = -2
 
     def draw(self):
         knots =[0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0]
@@ -35,7 +35,7 @@ class Nurbs:
         glRotatef(270, 1, 0, 0)
         glRotatef(0, 0, 1, 0)
         glRotatef(0, 0, 0, 1)
-        # glColor4f(1,1,1,1)
+
 
         gluNurbsSurface(self.Nurb, knots, knots, self.ctrlPoints, GL_MAP2_VERTEX_3)
         
@@ -52,6 +52,7 @@ class Nurbs:
         #  glEnd();
         #  glEnable(GL_LIGHTING);
         #  } 
+        
         
         glPopMatrix() 
 
