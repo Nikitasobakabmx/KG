@@ -32,7 +32,10 @@ class Nurbs:
         glEnable(GL_CULL_FACE)
         glEnable(GL_COLOR_MATERIAL)
         glColor(1, 1, 1, 1)
-        # glColor4f(1,1,1,1)
+        glRotatef(270, 1, 0, 0)
+        glRotatef(0, 0, 1, 0)
+        glRotatef(0, 0, 0, 1)
+
 
         gluNurbsSurface(self.Nurb, knots, knots, self.ctrlPoints, GL_MAP2_VERTEX_3)
         
@@ -49,6 +52,7 @@ class Nurbs:
         #  glEnd();
         #  glEnable(GL_LIGHTING);
         #  } 
+        
         
         glPopMatrix() 
 
